@@ -1,4 +1,4 @@
-name: Hello Workflow
+name: Build and Push Docker Image
 
 on:
   push:
@@ -6,9 +6,28 @@ on:
       - main
 
 jobs:
-  print_hello:
+  build_and_push:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Print Hello
-        run: echo "Hello"
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: '17'
+
+      - name: Build Spring Boot Project
+        run: ./mvnw clean install
+
+      - name: Login to Docker Hub
+        run: docker login -u ${{ secrets.DOCKERHUB_USERNAME }} -p ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Build Docker Image
+        run: |
+          docker build -t jonasrex/your-spring-boot-app .
+
+      - name: Push Docker Image
+        run: docker push jonasrex/your-spring-boot-app
