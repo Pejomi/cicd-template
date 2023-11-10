@@ -31,7 +31,4 @@ jobs:
 
       - name: Build and Push Docker Image with Jib
         run: |
-          ./mvnw compile jib:build \
-            -Djib.to.image=jonasrex/${{ env.ARTIFACT_ID }}:latest \
-            -Djib.to.auth.username=${{ secrets.DOCKERHUB_USERNAME }} \
-            -Djib.to.auth.password=${{ secrets.DOCKERHUB_PASSWORD }}
+          ./mvnw compile jib:build
