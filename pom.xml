@@ -16,6 +16,7 @@
     <description>cicd-template</description>
     <modules>
         <module>order-service</module>
+        <module>jonas-service</module>
     </modules>
 
 
