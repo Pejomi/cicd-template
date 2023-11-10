@@ -8,9 +8,12 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 @SpringBootTest
 class CicdTemplateApplicationTests {
 
+
+    // Should fail!!!!
+
     @Test
     void contextLoads() {
-        assertEquals(1, 1);
+        assertEquals(2, 1);
 
     }
 
