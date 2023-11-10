@@ -1,0 +1,39 @@
+# File: .github/workflows/test-on-pull-request.yml
+name: Test on Pull Request
+
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up Java
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+
+      - name: Build with Maven
+        run: |
+          ./mvnw clean install -B
+      # Use the appropriate Maven wrapper command for your project
+
+      - name: Run Tests
+        run: |
+          ./mvnw test
+      # Adjust this command based on your project's test execution command
+
+      - name: Check Test Results
+        run: |
+          if [ -f target/surefire-reports/TEST-*.xml ]; then
+            echo "Tests passed"
+          else
+            echo "Tests failed"
+            exit 1
+          fi

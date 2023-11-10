@@ -11,7 +11,7 @@ class CicdTemplateApplicationTests {
     @Test
     void contextLoads() {
         assertEquals(2, 1);
-        
+
     }
 
 }
