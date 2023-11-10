@@ -19,6 +19,9 @@ jobs:
           distribution: 'adopt'
           java-version: '17'
 
+      - name: Make mvnw Executable
+        run: chmod +x mvnw
+
       - name: Build Spring Boot Project
         run: ./mvnw clean install
 
